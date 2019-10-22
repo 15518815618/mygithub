@@ -1,0 +1,26 @@
+public class Example01
+{
+	public static void main(String[] args)throws Exception{
+	Thread t=new Thread(new Emergency(),"线程一");
+	t.start();
+	for(int i=0;i<6;i++){
+	System.out.println(Thread.currentThread().getName()+"输出"+i);
+	if(i==2){
+	t.join();
+	}
+	Thread.sleep(500);
+	}
+	}
+}
+class Emergency implements Runnable
+{
+	public void run(){
+	for(int i=0;i<6;i++){
+	System.out.println(Thread.currentThread().getName()+"输出"+i);
+	try{
+	Thread.sleep(500);
+	}catch(InterruptedException e){
+	e.printStackTrace();}
+	}
+	}
+}
